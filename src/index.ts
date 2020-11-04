@@ -1,16 +1,25 @@
 import * as path from 'path';
 import * as fs from 'fs-extra';
+
 import ts2js from './ts2js';
+import eslintJs from './eslintJs';
+import prettierJS from './prettierJs';
 import { IFileEntity, IBabelOption, IOption, Action } from './typing';
 
 function parse(fileList: IFileEntity[], option: IBabelOption = {}) {
   // Get js from ts
   const jsFiles = ts2js(fileList, option);
 
-  return jsFiles;
+  // eslint
+  const lintFiles = eslintJs(jsFiles);
+
+  // prettier
+  const prettierFiles = prettierJS(lintFiles);
+
+  return prettierFiles;
 }
 
-function sylvanas(files: string[], option: IOption) {
+function transformTsToJs(files: string[], option: IOption) {
   const cwd = option.cwd || process.cwd();
   const outDir = option.outDir || cwd;
   const action: Action = option.action || 'none';
@@ -44,7 +53,7 @@ function sylvanas(files: string[], option: IOption) {
   return parsedFileList;
 }
 
-sylvanas.parseText = function parseText(text: string, option: IBabelOption = {}): string {
+transformTsToJs.parseText = function parseText(text: string, option: IBabelOption = {}): string {
   const result = parse(
     [
       {
@@ -58,4 +67,4 @@ sylvanas.parseText = function parseText(text: string, option: IBabelOption = {})
   return result[0].data;
 };
 
-export = sylvanas;
+export = transformTsToJs;
