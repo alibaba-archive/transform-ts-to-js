@@ -10,11 +10,8 @@ function parse(fileList: IFileEntity[], option: IBabelOption = {}) {
   // Get js from ts
   const jsFiles = ts2js(fileList, option);
 
-  // eslint
-  const lintFiles = eslintJs(jsFiles);
-
   // prettier
-  const prettierFiles = prettierJS(lintFiles);
+  const prettierFiles = prettierJS(jsFiles);
 
   return prettierFiles;
 }
@@ -49,6 +46,9 @@ function transformTsToJs(files: string[], option: IOption) {
       }
     });
   }
+
+  // eslint
+  eslintJs(outDir);
 
   return parsedFileList;
 }
