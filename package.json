@@ -1,6 +1,6 @@
 {
   "name": "transform-ts-to-js",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "transform TS to JS",
   "main": "lib/index.js",
   "files": [
@@ -28,7 +28,7 @@
     "@babel/plugin-transform-typescript": "^7.9.4",
     "@iceworks/spec": "^1.0.0",
     "fs-extra": "^8.0.1",
-    "eslint": "^6.8.0",
+    "eslint": "^7.0.0",
     "prettier": "^2.1.2"
   },
   "devDependencies": {
