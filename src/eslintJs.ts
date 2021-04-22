@@ -1,4 +1,5 @@
 import { CLIEngine } from 'eslint';
+import * as path from 'path';
 
 const { getESLintConfig } = require('@iceworks/spec');
 
@@ -6,7 +7,8 @@ const engine = new CLIEngine({
   useEslintrc: false,
   fix: true,
   baseConfig: getESLintConfig('react-ts'),
-  extensions: ['.jsx', '.js']
+  extensions: ['.jsx', '.js'],
+  cwd: path.dirname(require.resolve('@iceworks/spec'))
 });
 
 function eslintJS(outDir: string) {
