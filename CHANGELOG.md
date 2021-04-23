@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.1.8
+
+- chore: add stylelint
+
 ## 0.1.7
 
 - chore: upgrade eslint version
